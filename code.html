@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="UTF-8">
+    <title>机床控制软件 - 代码库</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background: #f4f4f4;
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .main-container {
+            width: 1024px;
+            height: 768px;
+            background: #fff;
+            border-radius: 16px;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+            display: flex;
+            position: relative;
+        }
+        .sidebar {
+            width: 180px;
+            background: #fff;
+            border-right: 2px solid #222;
+            border-radius: 16px 0 0 16px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            padding: 30px 0 20px 0;
+        }
+        .sidebar .nav {
+            flex: 1;
+        }
+        .sidebar .nav-item {
+            font-size: 24px;
+            padding: 30px 0;
+            text-align: center;
+            border-bottom: 2px solid #222;
+            cursor: pointer;
+            user-select: none;
+            -webkit-app-region: no-drag;
+        }
+        .sidebar .nav-item:last-child {
+            border-bottom: none;
+        }
+        .sidebar .settings-icon {
+            margin-left: 20px;
+            margin-bottom: 10px;
+            width: 36px;
+            height: 36px;
+            background: #007bff;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .sidebar .settings-icon img {
+            width: 24px;
+            height: 24px;
+        }
+        .content {
+            flex: 1;
+            padding: 40px 40px 0 40px;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+        }
+        .close-icon {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-size: 32px;
+            cursor: pointer;
+            z-index: 10;
+            -webkit-app-region: no-drag;
+        }
+        /* 拖拽区域设置 */
+        .main-container {
+            -webkit-app-region: drag;
+        }
+        .close-icon,
+        .settings-icon {
+            -webkit-app-region: no-drag;
+        }
+    </style>
+</head>
+<body>
+    <div class="main-container" id="mainContainer">
+        <div class="sidebar">
+            <div class="nav">
+                <div class="nav-item">首页</div>
+                <div class="nav-item">代码库</div>
+                <div class="nav-item">状态</div>
+                <div class="nav-item">?</div>
+            </div>
+            <div class="settings-icon">
+                <img src="./picture/设置.jpg" alt="设置">
+            </div>
+        </div>
+        <div class="content">
+            <div class="close-icon" onclick="closeMain()">✖</div>
+        </div>
+    </div>
+    <script>
+        // 关闭代码库窗口
+        const { ipcRenderer } = require('electron');
+        function closeMain() {
+            ipcRenderer.send('close-index-window');
+        }
+
+        // 导航栏跳转与动画
+        document.addEventListener('DOMContentLoaded', () => {
+            const navItems = document.querySelectorAll('.nav-item');
+            const pageMap = ['index.html', 'code.html', 'status.html', 'help.html'];
+            navItems.forEach((item, idx) => {
+                item.addEventListener('click', () => {
+                    // 动画：点击时缩小再恢复
+                    item.style.transition = 'transform 0.1s';
+                    item.style.transform = 'scale(0.95)';
+                    setTimeout(() => {
+                        item.style.transform = 'scale(1)';
+                    }, 100);
+
+                    // 跳转页面
+                    if (pageMap[idx] && !window.location.href.endsWith(pageMap[idx])) {
+                        setTimeout(() => {
+                            window.location.href = pageMap[idx];
+                        }, 120);
+                    }
+                });
+
+                // 悬停动画
+                item.addEventListener('mouseenter', () => {
+                    item.style.transition = 'background 0.2s, color 0.2s';
+                    item.style.background = '#e6f0ff';
+                    item.style.color = '#007bff';
+                });
+                item.addEventListener('mouseleave', () => {
+                    item.style.background = '';
+                    item.style.color = '';
+                });
+            });
+        });
+    </script>
+</body>
+</html>

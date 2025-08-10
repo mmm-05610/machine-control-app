@@ -1,0 +1,7 @@
+[
+  { "username": "admin", "password": "Maoqh@05610", "type": "admin"},
+  { "username": "test", "password": "maoqh123456" ,"type": "assistant"},
+  { "username": "user", "password": "maoqh123456", "type": "user" },
+  { "username": "Chenmy", "password": "CMY@1125", "type": "assistant" },
+  { "username": "test", "password": "1", "type": "assistant" }
+]
