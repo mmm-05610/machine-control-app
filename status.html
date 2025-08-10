@@ -88,20 +88,119 @@
             -webkit-app-region: no-drag;
         }
     </style>
+    <link rel="stylesheet" href="adminlte-res/css/adminlte.css" />
 </head>
 <body>
     <div class="main-container" id="mainContainer">
-        <div class="sidebar">
-            <div class="nav">
-                <div class="nav-item">首页</div>
-                <div class="nav-item">代码库</div>
-                <div class="nav-item">状态</div>
-                <div class="nav-item">?</div>
-            </div>
-            <div class="settings-icon">
-                <img src="./picture/设置.jpg" alt="设置">
-            </div>
+        <aside class="app-sidebar bg-body-secondary shadow" data-bs-theme="dark">
+        <!--begin::Sidebar Brand-->
+        <div class="sidebar-brand">
+          <!--begin::Brand Link-->
+          <a href="./index.html" class="brand-link">
+            <!--begin::Brand Image-->
+            <img
+              src="./picture/logo.png"
+              alt="机床控制 logo"
+              class="brand-image opacity-75 shadow"
+            />
+            <!--end::Brand Image-->
+            <!--begin::Brand Text-->
+            <span class="brand-text fw-light">机床控制</span>
+            <!--end::Brand Text-->
+          </a>
+          <!--end::Brand Link-->
         </div>
+        <!--end::Sidebar Brand-->
+        <!--begin::Sidebar Wrapper-->
+        <div class="sidebar-wrapper">
+          <nav class="mt-2">
+            <ul
+              class="nav sidebar-menu flex-column"
+              data-lte-toggle="treeview"
+              role="navigation"
+              data-accordion="false"
+              id="navigation"
+            >
+              <!-- 1. 首页（一级菜单） -->
+              <li class="nav-item">
+                <a href="index.html" class="nav-link active">
+                  <i class="nav-icon bi bi-speedometer"></i>
+                  <p>首页</p>
+                </a>
+              </li>
+
+              <!-- 2. 代码库（二级菜单示例，可折叠） -->
+              <li class="nav-item">
+                <a href="#" class="nav-link">
+                  <i class="nav-icon bi bi-code"></i>
+                  <p>
+                    代码库
+                    <i class="nav-arrow bi bi-chevron-right"></i>
+                    <!-- 折叠箭头 -->
+                  </p>
+                </a>
+                <!-- 二级子菜单 -->
+                <ul class="nav nav-treeview">
+                  <li class="nav-item">
+                    <a href="code.html" class="nav-link">
+                      <i class="nav-icon bi bi-circle"></i>
+                      <p>本地代码</p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="code-cloud.html" class="nav-link">
+                      <i class="nav-icon bi bi-circle"></i>
+                      <p>云端代码</p>
+                    </a>
+                  </li>
+                </ul>
+              </li>
+
+              <!-- 3. 状态（一级菜单） -->
+              <li class="nav-item">
+                <a href="status.html" class="nav-link">
+                  <i class="nav-icon bi bi-bolt"></i>
+                  <p>状态</p>
+                </a>
+              </li>
+
+              <!-- 4. 帮助（一级菜单） -->
+              <li class="nav-item">
+                <a href="help.html" class="nav-link">
+                  <i class="nav-icon bi bi-question"></i>
+                  <p>帮助</p>
+                </a>
+              </li>
+
+              <!-- 5. 设置（一级菜单） -->
+              <li class="nav-item">
+                <a href="setting.html" class="nav-link">
+                  <i class="nav-icon bi bi-xxx"></i>
+                  <p>设置</p>
+                </a>
+              </li>
+              <!-- 预留拓展位置（后续直接添加即可） -->
+              <!-- <li class="nav-item">
+                <a href="new-page.html" class="nav-link">
+                  <i class="nav-icon bi bi-xxx"></i>
+                  <p>新菜单</p>
+                </a>
+              </li> -->
+            </ul>
+          </nav>
+          <!-- 底部设置图标 -->
+          <!-- <div style="padding: 20px; margin-top: auto">
+            <div class="settings-icon" onclick="openSettings()">
+              <img
+                src="./picture/settings.png"
+                alt="设置"
+                style="width: 36px; cursor: pointer"
+              />
+            </div>
+          </div> -->
+        </div>
+        <!--end::Sidebar Wrapper-->
+      </aside>
         <div class="content">
             <div class="close-icon" onclick="closeMain()">✖</div>
         </div>
@@ -134,16 +233,7 @@
                     }
                 });
 
-                // 悬停动画
-                item.addEventListener('mouseenter', () => {
-                    item.style.transition = 'background 0.2s, color 0.2s';
-                    item.style.background = '#e6f0ff';
-                    item.style.color = '#007bff';
-                });
-                item.addEventListener('mouseleave', () => {
-                    item.style.background = '';
-                    item.style.color = '';
-                });
+                
             });
         });
     </script>

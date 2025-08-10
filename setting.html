@@ -2,7 +2,7 @@
 <html lang="zh-cn">
 <head>
     <meta charset="UTF-8">
-    <title>机床控制软件 - 帮助</title>
+    <title>机床控制软件 - 设置</title>
     <style>
         body {
             margin: 0;
@@ -206,11 +206,12 @@
         </div>
     </div>
     <script>
-        // 关闭帮助窗口
+        // 关闭状态窗口
         const { ipcRenderer } = require('electron');
         function closeMain() {
             ipcRenderer.send('close-index-window');
         }
+
         // 导航栏跳转与动画
         document.addEventListener('DOMContentLoaded', () => {
             const navItems = document.querySelectorAll('.nav-item');

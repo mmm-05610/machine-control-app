@@ -1,284 +1,376 @@
 <!DOCTYPE html>
 <html lang="zh-cn">
-
-<head>
-    <meta charset="UTF-8">
+  <head>
+    <meta charset="UTF-8" />
     <title>机床控制软件 - 主页</title>
     <style>
-        body {
-            margin: 0;
-            padding: 0;
-            background: #f4f4f4;
-            font-family: Arial, sans-serif;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-        }
+      body {
+        margin: 0;
+        padding: 0;
+        background: #f4f4f4;
+        font-family: Arial, sans-serif;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+      }
 
-        .main-container {
-            width: 1024px;
-            height: 768px;
-            background: #fff;
-            border-radius: 16px;
-            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
-            display: flex;
-            position: relative;
-        }
+      .main-container {
+        width: 1024px;
+        height: 768px;
+        background: #fff;
+        border-radius: 16px;
+        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+        display: flex;
+        position: relative;
+      }
 
-        .sidebar {
-            width: 180px;
-            background: #fff;
-            border-right: 2px solid #222;
-            border-radius: 16px 0 0 16px;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            padding: 30px 0 20px 0;
-        }
+      .sidebar {
+        width: 180px;
+        background: #fff;
+        border-right: 2px solid #222;
+        border-radius: 16px 0 0 16px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        padding: 30px 0 20px 0;
+      }
 
-        .sidebar .nav {
-            flex: 1;
-        }
+      .sidebar .nav {
+        flex: 1;
+      }
 
-        .sidebar .nav-item {
-            font-size: 24px;
-            padding: 30px 0;
-            text-align: center;
-            border-bottom: 2px solid #222;
-            cursor: pointer;
-            user-select: none;
-            -webkit-app-region: no-drag;
-            /* 不允许拖动 */
-        }
+      .sidebar .nav-item {
+        font-size: 24px;
+        padding: 30px 0;
+        text-align: center;
+        border-bottom: 2px solid #222;
+        cursor: pointer;
+        user-select: none;
+        -webkit-app-region: no-drag;
+        /* 不允许拖动 */
+      }
 
-        .sidebar .nav-item:last-child {
-            border-bottom: none;
-        }
+      .sidebar .nav-item:last-child {
+        border-bottom: none;
+      }
 
-        .sidebar .settings-icon {
-            margin-left: 20px;
-            margin-bottom: 10px;
-            width: 36px;
-            height: 36px;
-            background: #007bff;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
+      .sidebar .settings-icon {
+        margin-left: 20px;
+        margin-bottom: 10px;
+        width: 36px;
+        height: 36px;
+        background: #007bff;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
 
-        .sidebar .settings-icon img {
-            width: 24px;
-            height: 24px;
-        }
+      .sidebar .settings-icon img {
+        width: 24px;
+        height: 24px;
+      }
 
-        .content {
-            flex: 1;
-            padding: 40px 40px 0 40px;
-            position: relative;
-            display: flex;
-            flex-direction: column;
-        }
+      .content {
+        flex: 1;
+        padding: 40px 40px 0 40px;
+        position: relative;
+        display: flex;
+        flex-direction: column;
+      }
 
-        .close-icon {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            font-size: 32px;
-            cursor: pointer;
-            z-index: 10;
-            -webkit-app-region: no-drag;
-        }
+      .close-icon {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        font-size: 32px;
+        cursor: pointer;
+        z-index: 10;
+        -webkit-app-region: no-drag;
+      }
 
-        .clock-box {
-            width: 80%;
-            margin: 0 auto;
-            margin-top: 30px;
-            border: 2px solid #222;
-            border-radius: 24px;
-            text-align: center;
-            padding: 40px 0;
-            font-size: 80px;
-            font-family: 'Consolas', monospace;
-        }
+      .clock-box {
+        width: 80%;
+        margin: 0 auto;
+        margin-top: 30px;
+        border: 2px solid #222;
+        border-radius: 24px;
+        text-align: center;
+        padding: 40px 0;
+        font-size: 80px;
+        font-family: "Consolas", monospace;
+      }
 
-        .info-box {
-            width: 60%;
-            margin: 30px auto 0 auto;
-            border: 2px dashed #222;
-            border-radius: 12px;
-            padding: 16px 24px;
-            display: flex;
-            justify-content: space-between;
-            font-size: 18px;
-        }
+      .info-box {
+        width: 60%;
+        margin: 30px auto 0 auto;
+        border: 2px dashed #222;
+        border-radius: 12px;
+        padding: 16px 24px;
+        display: flex;
+        justify-content: space-between;
+        font-size: 18px;
+      }
 
-        .file-area {
-            width: 90%;
-            margin: 40px auto 0 auto;
-            display: flex;
-            align-items: center;
-        }
+      .file-area {
+        width: 90%;
+        margin: 40px auto 0 auto;
+        display: flex;
+        align-items: center;
+      }
 
-        .file-area input[type="text"] {
-            width: 120px;
-            padding: 8px;
-            border-radius: 6px;
-            border: 1px solid #ccc;
-            margin-right: 16px;
-        }
+      .file-area input[type="text"] {
+        width: 120px;
+        padding: 8px;
+        border-radius: 6px;
+        border: 1px solid #ccc;
+        margin-right: 16px;
+      }
 
-        .file-area button {
-            padding: 8px 24px;
-            border-radius: 6px;
-            border: 1px solid #007bff;
-            background: #fff;
-            color: #007bff;
-            cursor: pointer;
-        }
+      .file-area button {
+        padding: 8px 24px;
+        border-radius: 6px;
+        border: 1px solid #007bff;
+        background: #fff;
+        color: #007bff;
+        cursor: pointer;
+      }
 
-        .file-info {
-            margin-top: 12px;
-            font-size: 16px;
-        }
+      .file-info {
+        margin-top: 12px;
+        font-size: 16px;
+      }
 
-        /* 拖拽区域设置 */
-        .main-container {
-            -webkit-app-region: drag;
-        }
+      /* 拖拽区域设置 */
+      .main-container {
+        -webkit-app-region: drag;
+      }
 
-        .close-icon,
-        .settings-icon,
-        input,
-        button {
-            -webkit-app-region: no-drag;
-        }
+      .close-icon,
+      .settings-icon,
+      input,
+      button {
+        -webkit-app-region: no-drag;
+      }
     </style>
-</head>
+    <link rel="stylesheet" href="adminlte-res/css/adminlte.css" />
+    <link rel="stylesheet" href="adminlte-res/css/adminlte.min.css">
+    <link rel="stylesheet" href="plugins/bootstrap-icons/bootstrap-icons.css">
+  </head>
 
-<body>
+  <body>
     <div class="main-container" id="mainContainer">
-        <div class="sidebar">
-            <div class="nav">
-                <div class="nav-item">首页</div>
-                <div class="nav-item">代码库</div>
-                <div class="nav-item">状态</div>
-                <div class="nav-item">?</div>
-            </div>
-            <div class="settings-icon">
-                <img src="./picture/设置.jpg" alt="设置">
-            </div>
+      <aside class="app-sidebar bg-body-secondary shadow" data-bs-theme="dark">
+        <!--begin::Sidebar Brand-->
+        <div class="sidebar-brand">
+          <!--begin::Brand Link-->
+          <a href="./index.html" class="brand-link">
+            <!--begin::Brand Image-->
+            <img
+              src="./picture/logo.png"
+              alt="机床控制 logo"
+              class="brand-image opacity-75 shadow"
+            />
+            <!--end::Brand Image-->
+            <!--begin::Brand Text-->
+            <span class="brand-text fw-light">机床控制</span>
+            <!--end::Brand Text-->
+          </a>
+          <!--end::Brand Link-->
         </div>
+        <!--end::Sidebar Brand-->
+        <!--begin::Sidebar Wrapper-->
+        <div class="sidebar-wrapper">
+          <nav class="mt-2">
+            <ul
+              class="nav sidebar-menu flex-column"
+              data-lte-toggle="treeview"
+              role="navigation"
+              data-accordion="false"
+              id="navigation"
+            >
+              <!-- 1. 首页（一级菜单） -->
+              <li class="nav-item">
+                <a href="index.html" class="nav-link active">
+                  <i class="nav-icon bi bi-speedometer"></i>
+                  <p>首页</p>
+                </a>
+              </li>
 
+              <!-- 2. 代码库（二级菜单示例，可折叠） -->
+              <li class="nav-item">
+                <a href="javascript:void(0)" class="nav-link">
+                  <!-- 阻止默认跳转 -->
+                  <i class="nav-icon bi bi-code"></i>
+                  <p>
+                    代码库
+                    <i class="nav-arrow bi bi-chevron-right"></i>
+                  </p>
+                </a>
+                <!-- 二级子菜单 -->
+                <ul class="nav nav-treeview">
+                  <li class="nav-item">
+                    <a href="code.html" class="nav-link">
+                      <i class="nav-icon bi bi-circle"></i>
+                      <p>本地代码</p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="code-cloud.html" class="nav-link">
+                      <i class="nav-icon bi bi-circle"></i>
+                      <p>云端代码</p>
+                    </a>
+                  </li>
+                </ul>
+              </li>
 
+              <!-- 3. 状态（一级菜单） -->
+              <li class="nav-item">
+                <a href="status.html" class="nav-link">
+                  <i class="nav-icon bi bi-bolt"></i>
+                  <p>状态</p>
+                </a>
+              </li>
 
-        <div class="content">
-            <div class="close-icon" onclick="closeMain()">✖</div>
-            <div class="clock-box" id="clock">15 : 08</div>
-            <div class="info-box">
-                <div class="machine-info">
-                    机床型号：~~~~<br>
-                    状态：开机<br>
-                    编码信息：file2
-                </div>
-                <div class="user-info">
-                    <!-- 用户信息将被JS填充 -->
-                </div>
+              <!-- 4. 帮助（一级菜单） -->
+              <li class="nav-item">
+                <a href="help.html" class="nav-link">
+                  <i class="nav-icon bi bi-question"></i>
+                  <p>帮助</p>
+                </a>
+              </li>
+
+              <!-- 5. 设置（一级菜单） -->
+              <li class="nav-item">
+                <a href="setting.html" class="nav-link">
+                  <i class="nav-icon bi bi-xxx"></i>
+                  <p>设置</p>
+                </a>
+              </li>
+              <!-- 预留拓展位置（后续直接添加即可） -->
+              <!-- <li class="nav-item">
+                <a href="new-page.html" class="nav-link">
+                  <i class="nav-icon bi bi-xxx"></i>
+                  <p>新菜单</p>
+                </a>
+              </li> -->
+            </ul>
+          </nav>
+          <!-- 底部设置图标 -->
+          <!-- <div style="padding: 20px; margin-top: auto">
+            <div class="settings-icon" onclick="openSettings()">
+              <img
+                src="./picture/settings.png"
+                alt="设置"
+                style="width: 36px; cursor: pointer"
+              />
             </div>
-            <div class="file-area">
-                <input type="text" value="file" readonly>
-                <div style="flex:1; border-bottom:2px solid #222; margin:0 16px;"></div>
-                <button>导入</button>
-            </div>
-            <div class="file-info">
-                机床1：Installation_~~~~_v1.23_1646dka.tar
-            </div>
+          </div> -->
         </div>
+        <!--end::Sidebar Wrapper-->
+      </aside>
+
+      <div class="content">
+        <div class="close-icon" onclick="closeMain()">✖</div>
+        <div class="clock-box" id="clock">15 : 08</div>
+        <div class="info-box">
+          <div class="machine-info">
+            机床型号：~~~~<br />
+            状态：开机<br />
+            编码信息：file2
+          </div>
+          <div class="user-info">
+            <!-- 用户信息将被JS填充 -->
+          </div>
+        </div>
+        <div class="file-area">
+          <input type="text" value="file" readonly />
+          <div
+            style="flex: 1; border-bottom: 2px solid #222; margin: 0 16px"
+          ></div>
+          <button>导入</button>
+        </div>
+        <div class="file-info">机床1：Installation_~~~~_v1.23_1646dka.tar</div>
+      </div>
     </div>
     <script>
-        // 关闭主页窗口
-        const { ipcRenderer } = require('electron');
-        function closeMain() {
-            ipcRenderer.send('close-index-window');
-        }
-        const fs = require('fs');
-        const path = require('path');
+      // 关闭主页窗口
+      const { ipcRenderer } = require("electron");
+      function closeMain() {
+        ipcRenderer.send("close-index-window");
+      }
+      const fs = require("fs");
+      const path = require("path");
 
-        // 用户类型映射
-        const typeMap = {
-            admin: '管理员',
-            assistant: '助手',
-            user: '用户'
-        };
+      // 用户类型映射
+      const typeMap = {
+        admin: "管理员",
+        assistant: "助手",
+        user: "用户",
+      };
 
-        // 获取当前登录用户（假设登录成功后用户名存储在 localStorage）
-        function getCurrentUser() {
-            return localStorage.getItem('currentUser');
-        }
+      // 获取当前登录用户（假设登录成功后用户名存储在 localStorage）
+      function getCurrentUser() {
+        return localStorage.getItem("currentUser");
+      }
 
-        // 渲染用户信息
-        function renderUserInfo() {
-            const userId = getCurrentUser();
-            if (!userId) return;
-            const userPath = path.join(__dirname, 'user.json');
-            fs.readFile(userPath, 'utf8', (err, data) => {
-                if (err) return;
-                try {
-                    const users = JSON.parse(data);
-                    const user = users.find(u => u.username === userId);
-                    if (user) {
-                        document.querySelector('.user-info').innerHTML =
-                            `<div>用户：${user.username}</div>
-                            <div>类型：${typeMap[user.type] || user.type}</div>`;
-                    }
-                } catch (e) { }
-            });
-        }
-        // 时钟演示（可替换为动态时间）
-        function updateClock() {
-            const clock = document.getElementById('clock');
-            const now = new Date();
-            clock.textContent = now.getHours().toString().padStart(2, '0') + ' : ' + now.getMinutes().toString().padStart(2, '0');
-        }
-        setInterval(updateClock, 1000);
-        updateClock();
-
-        // 导航栏跳转与动画
-        document.addEventListener('DOMContentLoaded', () => {
-            renderUserInfo();
-            const navItems = document.querySelectorAll('.nav-item');
-            const pageMap = ['index.html', 'code.html', 'status.html', 'help.html'];
-            navItems.forEach((item, idx) => {
-                item.addEventListener('click', () => {
-                    // 动画：点击时缩小再恢复
-                    item.style.transition = 'transform 0.1s';
-                    item.style.transform = 'scale(0.95)';
-                    setTimeout(() => {
-                        item.style.transform = 'scale(1)';
-                    }, 100);
-
-                    // 跳转页面
-                    if (pageMap[idx] && !window.location.href.endsWith(pageMap[idx])) {
-                        setTimeout(() => {
-                            window.location.href = pageMap[idx];
-                        }, 120);
-                    }
-                });
-
-                // 悬停动画
-                item.addEventListener('mouseenter', () => {
-                    item.style.transition = 'background 0.2s, color 0.2s';
-                    item.style.background = '#e6f0ff';
-                    item.style.color = '#007bff';
-                });
-                item.addEventListener('mouseleave', () => {
-                    item.style.background = '';
-                    item.style.color = '';
-                });
-            });
+      // 渲染用户信息
+      function renderUserInfo() {
+        const userId = getCurrentUser();
+        if (!userId) return;
+        const userPath = path.join(__dirname, "user.json");
+        fs.readFile(userPath, "utf8", (err, data) => {
+          if (err) return;
+          try {
+            const users = JSON.parse(data);
+            const user = users.find((u) => u.username === userId);
+            if (user) {
+              document.querySelector(".user-info").innerHTML = `<div>用户：${
+                user.username
+              }</div>
+                            <div>类型：${
+                              typeMap[user.type] || user.type
+                            }</div>`;
+            }
+          } catch (e) {}
         });
-    </script>
-</body>
+      }
+      // 时钟演示（可替换为动态时间）
+      function updateClock() {
+        const clock = document.getElementById("clock");
+        const now = new Date();
+        clock.textContent =
+          now.getHours().toString().padStart(2, "0") +
+          " : " +
+          now.getMinutes().toString().padStart(2, "0");
+      }
+      setInterval(updateClock, 1000);
+      updateClock();
 
+      // 导航栏跳转与动画
+      document.addEventListener("DOMContentLoaded", () => {
+        renderUserInfo();
+        const navItems = document.querySelectorAll(".nav-item");
+        const pageMap = ["index.html", "code.html", "status.html", "help.html"];
+        navItems.forEach((item, idx) => {
+          item.addEventListener("click", () => {
+            // 动画：点击时缩小再恢复
+            item.style.transition = "transform 0.1s";
+            item.style.transform = "scale(0.95)";
+            setTimeout(() => {
+              item.style.transform = "scale(1)";
+            }, 100);
+
+            // 跳转页面
+            if (pageMap[idx] && !window.location.href.endsWith(pageMap[idx])) {
+              setTimeout(() => {
+                window.location.href = pageMap[idx];
+              }, 120);
+            }
+          });
+        });
+      });
+    </script>
+  </body>
 </html>
